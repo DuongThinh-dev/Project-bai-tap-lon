@@ -15,6 +15,8 @@ public class PlayerAim : MonoBehaviour
     [Header("UI crosshair")]
     public GameObject crosshair;
 
+    public GameObject secondaryPrompt;
+
     public IInteractable CurrentInteractable { get; private set; }
 
     void Start()
@@ -62,5 +64,8 @@ public class PlayerAim : MonoBehaviour
 
         if (crosshair != null)
             crosshair.SetActive(!isLookingAtInteractable);
+
+        if (secondaryPrompt != null)
+            secondaryPrompt.SetActive(CurrentInteractable is ISecondaryInteractable);
     }
 }

@@ -6,6 +6,7 @@ public class PlayerInteract : MonoBehaviour
 
     [Header("Phím tương tác")]
     public KeyCode interactKey = KeyCode.E;
+    public KeyCode secondaryKey = KeyCode.R;
 
     void Update()
     {
@@ -14,6 +15,12 @@ public class PlayerInteract : MonoBehaviour
         if (Input.GetKeyDown(interactKey) && playerAim.CurrentInteractable != null)
         {
             playerAim.CurrentInteractable.Interact();
+        }
+
+        if (Input.GetKeyDown(secondaryKey) &&
+            playerAim.CurrentInteractable is ISecondaryInteractable secondary)
+        {
+            secondary.SecondaryInteract();
         }
     }
 }
