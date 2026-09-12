@@ -12,10 +12,14 @@ public class PlayerAim : MonoBehaviour
     [Header("UI gợi ý tương tác")]
     public GameObject interactPrompt;
 
-    [Header("UI crosshair")]
+    [Header("UI dấu tâm")]
     public GameObject crosshair;
 
     public GameObject secondaryPrompt;
+
+    public GameObject usePrompt;
+
+    public PlayerSit playerSit;
 
     public IInteractable CurrentInteractable { get; private set; }
 
@@ -30,6 +34,15 @@ public class PlayerAim : MonoBehaviour
 
     void Update()
     {
+        if (ComputerUIController.IsOpen)
+        {
+            if (crosshair != null) crosshair.SetActive(false);
+            if (interactPrompt != null) interactPrompt.SetActive(false);
+            if (secondaryPrompt != null) secondaryPrompt.SetActive(false);
+            if (usePrompt != null) usePrompt.SetActive(false);
+            return;
+        }
+
         HandleAimDetection();
     }
 
@@ -67,5 +80,11 @@ public class PlayerAim : MonoBehaviour
 
         if (secondaryPrompt != null)
             secondaryPrompt.SetActive(CurrentInteractable is ISecondaryInteractable);
+
+        if (usePrompt != null)
+        {
+            bool isSitting = playerSit != null && playerSit.IsSitting;
+            usePrompt.SetActive(CurrentInteractable is IUsable usable && usable.CanUse && isSitting);
+        }
     }
 }
