@@ -4,7 +4,7 @@ public class DualLightSwitchInteract : MonoBehaviour, IInteractable
 {
     [Header("Đèn 1")]
     public Light light1;
-    public Renderer bulbRenderer1;      // renderer của bóng đèn 1 (để đổi màu phát sáng, có thể để trống)
+    public Renderer bulbRenderer1;      
     public int bulbMaterialIndex1 = 0;
     public Material bulbOnMaterial1;
     public Material bulbOffMaterial1;
